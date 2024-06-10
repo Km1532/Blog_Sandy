@@ -1,9 +1,11 @@
 {% load static %}
 <html>
 <head>
-    <title>Мій блог</title>
+    <title>Мой блог</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+
+
 </head>
 <body>
 <div class="shell">
@@ -13,35 +15,39 @@
             <ul>
                 <li><a href="#" class="active">Головна</a></li>
                 <li><a href="#">Адмін панель</a></li>
+
             </ul>
         </div>
 
         <div id="main">
             <div id="content" class="left">
+
                 <div class="projects">
                     <h3>Записи</h3>
-                    {% for post in post_list %}
+					{% for post in post_list %}
                     <div class="item">
                         <div class="image left">
-						<a href="#"> <img src="{{ post.img.url }}" width="200px "></a>	
+						<a href="#"> <img src="img/start.png" alt=""></a>	
 	               </div>
-                        <div class="item">
-                            <div class="text left">
-                                <h4>{{ post.title }}</h4>
-                                <p>{{ post.description }}</p>
-                                <p>Автор: {{ post.author }}</p>
-                            </div>
-                            <div class="cl">&nbsp;</div>
+                        <div class="text left">
+                            <h4>{{ post.title }}</h4>
+                            <p>{{ post.description}}</p>
+                            <p>Автор: {{ post.author}}</p>
                         </div>
-                    {% endfor %}
+                        <div class="cl">&nbsp;</div>
+                    </div>
+
                 </div>
             </div>
+
             <div class="cl">&nbsp;</div>
         </div>
+		{% endfor s%}
+
     </div>
 
     <div id="footer">
-        <p class="copy right">Copyright &copy; 2024</p>
+        <p class="copy right">Copyright &copy;  2024 </p>
     </div>
 </div>
 </body>
