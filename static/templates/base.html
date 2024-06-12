@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <title>{% block title %}Мій блог{% endblock %}</title>
    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
-   <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+   <link rel="shortcut icon" href="{% static 'css/images/favicon.ico' %}" />
    <style>
        body.light-theme {
            background-color: white;
@@ -22,6 +22,36 @@
        .hidden {
            display: none;
        }
+       .shell, .border, #navigation, #main, #footer {
+           transition: background-color 0.3s, color 0.3s;
+       }
+       .light-theme .shell, .light-theme .border, .light-theme #navigation, .light-theme #main, .light-theme #footer {
+           background-color: white;
+           color: black;
+       }
+       .dark-theme .shell, .dark-theme .border, .dark-theme #navigation, .dark-theme #main, .dark-theme #footer {
+           background-color: black;
+           color: white;
+       }
+       a {
+           color: inherit;
+           text-decoration: none;
+       }
+       a:hover {
+           text-decoration: underline;
+       }
+       .light-theme a {
+           color: blue;
+       }
+       .dark-theme a {
+           color: red;
+       }
+       .light-theme #navigation ul li a {
+           color: blue;
+       }
+       .dark-theme #navigation ul li a {
+           color: red;
+       }
    </style>
 </head>
 <body class="light-theme">
@@ -29,24 +59,24 @@
     <div class="border">
         <div id="navigation">
             <ul>
-                <li><a href="/" class="active">Головна</a></li>
-                <li><a href="/about">Про нас</a></li>
-                <li><a href="/categories">Категорії</a></li>
-                <li><a href="/tags">Теги</a></li>
+                <li><a href="{% url 'home' %}" class="active">Головна</a></li>
+                <li><a href="{% url 'about' %}">Про нас</a></li>
+                <li><a href="{% url 'categories' %}">Категорії</a></li>
+                <li><a href="{% url 'tags' %}">Теги</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="/profile">Мій профіль</a></li>
+                    <li><a href="{% url 'profile' %}">Мій профіль</a></li>
                     {% if user.is_author %}
-                        <li><a href="/my-articles">Мої статті</a></li>
-                        <li><a href="/article/create">Нова стаття</a></li>
+                        <li><a href="{% url 'my_articles' %}">Мої статті</a></li>
+                        <li><a href="{% url 'create_article' %}">Нова стаття</a></li>
                     {% endif %}
                     {% if user.is_admin %}
-                        <li><a href="/admin">Адмін панель</a></li>
-                        <li><a href="/manage-announcements">Оголошення</a></li>
+                        <li><a href="{% url 'admin:index' %}">Адмін панель</a></li>
+                        <li><a href="{% url 'manage_announcements' %}">Оголошення</a></li>
                     {% endif %}
-                    <li><a href="/logout">Вийти</a></li>
+                    <li><a href="{% url 'logout' %}">Вийти</a></li>
                 {% else %}
-                    <li><a href="/login">Увійти</a></li>
-                    <li><a href="/register">Реєстрація</a></li>
+                    <li><a href="{% url 'login' %}">Увійти</a></li>
+                    <li><a href="{% url 'register' %}">Реєстрація</a></li>
                 {% endif %}
                 <li>
                     <span id="sun-icon" class="theme-toggle">🌞</span>
@@ -83,3 +113,4 @@
 </script>
 </body>
 </html>
+    
